@@ -1,9 +1,13 @@
-import List from "./components/List";
+import Heading from "./components/Heading";
 
 function App() {
   return (
     <>
-      <List list={["Item 1", "Item 2", "Item 3"]} />
+      <Heading
+        heading="To Do List"
+        unfinished={["Item 1", "Item 2", "Item 3"]}
+        completed={["Item 4", "Item 5", "Item 6"]}
+      />
     </>
   );
 }
