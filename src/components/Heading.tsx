@@ -1,37 +1,52 @@
 import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+import UnfinishedTasks from "./UnfinishedTasks";
+import CompletedTasks from "./CompletedTasks";
 
 interface Props {
-  unfinished: string[];
-  completed: string[];
   heading: string;
 }
 
-function Heading({ unfinished, completed, heading }: Props) {
-  const [navPage, setNavPage] = useState(1);
+function Heading({ heading }: Props) {
+  const [navPage, setNavPage] = useState("unfinishedTasks");
 
   return (
     <>
-      <h1 className="text-center">{heading}</h1>
+      <Router>
+        <h1 className="text-center">{heading}</h1>
 
-      <ul className="nav nav-tabs justify-content-center">
-        <li className="nav-item">
-          <a
-            className={navPage === 1 ? "nav-link active" : "nav-link"}
-            onClick={() => setNavPage(1)}
-          >
-            Unfinished
-          </a>
-        </li>
+        <ul className="nav nav-tabs justify-content-center">
+          <li className="nav-item">
+            <Link
+              className={
+                navPage === "unfinishedTasks" ? "nav-link active" : "nav-link"
+              }
+              onClick={() => setNavPage("unfinishedTasks")}
+              to="/unfinished-tasks"
+            >
+              Unfinished
+            </Link>
+          </li>
 
-        <li>
-          <a
-            className={navPage === 2 ? "nav-link active" : "nav-link"}
-            onClick={() => setNavPage(2)}
-          >
-            Completed
-          </a>
-        </li>
-      </ul>
+          <li>
+            <Link
+              className={
+                navPage === "completedTasks" ? "nav-link active" : "nav-link"
+              }
+              onClick={() => setNavPage("completedTasks")}
+              to="/completed-tasks"
+            >
+              Completed
+            </Link>
+          </li>
+        </ul>
+
+        <Routes>
+          <Route path="/unfinished-tasks" element={<UnfinishedTasks />} />
+          <Route path="/completed-tasks" element={<CompletedTasks />} />
+        </Routes>
+      </Router>
     </>
   );
 }
