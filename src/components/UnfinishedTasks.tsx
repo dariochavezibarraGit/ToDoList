@@ -4,21 +4,21 @@ function UnfinishedTasks() {
     name: string;
     description: string;
     dueDate: string;
-    finished: boolean;
+    status: boolean;
   }[] = [
     {
       id: 0,
       name: "Do the dishes",
       description: "Clean everything!",
       dueDate: "Now",
-      finished: false,
+      status: false,
     },
     {
       id: 1,
       name: "Feed the cat",
       description: "Tomomi loves happy tuna",
       dueDate: "Uuuh",
-      finished: false,
+      status: false,
     },
   ];
 
@@ -46,6 +46,34 @@ function UnfinishedTasks() {
             <button className="btn btn-primary" type="button">
               Create Task
             </button>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="column">
+            <h2>Unfinished Tasks</h2>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Task</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {unfinishedTasks.map((task) => (
+                  <tr>
+                    <th className="row">{task.id}</th>
+                    <td>{task.name}</td>
+                    <td>{task.description}</td>
+                    <td>{task.dueDate}</td>
+                    <td>{task.status === false ? "Unfinished" : null}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
